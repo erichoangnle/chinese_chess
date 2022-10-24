@@ -1,4 +1,3 @@
-from pygame.locals import *
 import pygame, sys, copy
 
 # Load possible moves pointer
@@ -106,7 +105,6 @@ original_map = [
     ['red_chariot', 'red_horse', 'red_elephant', 'red_advisor', 'red_general', 'red_advisor1', 'red_elephant1', 'red_horse1', 'red_chariot1']
 ]
 
-
 # Game board map
 map = copy.deepcopy(original_map)
 
@@ -147,7 +145,7 @@ def piece_clicked(x, y):
     Listen for event in game window to determine which piece was clicked on.
     Only return the piece's name and its location of clicked piece
     belong to current player. You can't click on your oppenent's pieces.
-    Return a pair  of coordinate (i, j) on the map.
+    Return a pair of coordinate (i, j) on the map.
     """
     for i in range(len(map)):
         for j in range(len(map[0])):
@@ -589,22 +587,6 @@ def end_game_question(turn, x, y):
     if yes.get_rect(topleft = (735, 130)).collidepoint(x, y): return True
     if no.get_rect(topleft = (875, 130)).collidepoint(x, y): sys.exit()
 
-def all_actions(state):
-    """
-    Return all available action for a game board. Move is 
-    a list containing piece and move: (piece, (i, j)).
-    """
-    actions = []
-    map = state
-    for piece in player(turn):
-        if on_board(piece, map):
-            i, j = get_ij(piece, map)
-            moves = possible_moves(piece, i, j, map)
-            moves = check_future_checkmate(piece, moves, turn, map)
-            for move in moves:
-                actions.append((piece, move))
-    return actions
-
 
 # Initialize pygame
 pygame.init()
@@ -645,20 +627,13 @@ while True:
             render_game(map)
             continue     
 
-    # Human player's turn
+    # Print player's turn
     if player(turn) == red_pieces:
         text_turn = my_font.render("Red Player's Turn", False, (0, 0, 0))
         screen.blit(text_turn, (730, 470))
     else:
         text_turn = my_font.render("Black Player's Turn", False, (0, 0, 0))
         screen.blit(text_turn, (720, 470))
-
-    if checkmate(map, turn):
-        if player(turn) == red_pieces: i, j = get_ij('red_general', map)
-        if player(turn) == black_pieces: i, j = get_ij('black_general', map)
-        screen.blit(active, (board[i][j][0] - 22, board[i][j][1] - 22))
-        text_checkmate = my_font1.render("CHECKMATE", False, (0, 0, 0))
-        screen.blit(text_checkmate, (730, 310))
 
     # Listen to quit program event
     for event in pygame.event.get():
@@ -685,12 +660,22 @@ while True:
                 move = move_clicked(moves, x, y)
                 make_move(piece, move, map)
                 render_game(map)
+                screen.blit(dot, (board[i][j][0] - 2, board[i][j][1] - 2))
+                screen.blit(active, (board[move[0]][move[1]][0] - 22, board[move[0]][move[1]][1] - 22))
                 second_click = False
                 turn += 1
 
+            # If second click not on a valid move
             else:
                 render_game(map)
                 second_click = False
-    
 
+            # If checkmate
+            if checkmate(map, turn):
+                if player(turn) == red_pieces: m, n = get_ij('red_general', map)
+                if player(turn) == black_pieces: m, n = get_ij('black_general', map)
+                screen.blit(active, (board[m][n][0] - 22, board[m][n][1] - 22))
+                text_checkmate = my_font1.render("CHECKMATE", False, (0, 0, 0))
+                screen.blit(text_checkmate, (730, 310))
+    
     pygame.display.update()
