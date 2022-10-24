@@ -87,8 +87,9 @@ red_attacker = [
 red_advisor_moves = [(9, 3), (9, 5), (8, 4), (7, 3), (7, 5)]
 red_elephant_moves = [(9, 2), (7, 0), (7, 4), (5, 2), (9, 6), (7, 8), (5, 6)]
 red_general_moves = [(9, 3), (9, 4), (9, 5), (8, 3), (8, 4), (8, 5), (7, 3), (7, 4), (7, 5)]
+
 # Possible moves for black player's defenders
-black_advisor_mvoes = [(0, 3), (0, 5), (1, 4), (2, 3), (2, 5)]
+black_advisor_moves = [(0, 3), (0, 5), (1, 4), (2, 3), (2, 5)]
 black_elephant_moves = [(0, 2), (2, 0), (4, 2), (2, 4), (0, 6), (2, 8), (4, 6)]
 black_general_moves = [(0, 3), (0, 4), (0, 5), (1, 3), (1, 4), (1, 5), (2, 3), (2, 4), (2, 5)]
 
@@ -173,8 +174,8 @@ def possible_moves(piece, i, j, map):
                 if map[i][j + 1] not in red_pieces: moves.append((i, j + 1))
     # Get all possible moves for red advisor
     if piece in ['red_advisor', 'red_advisor1']:
-        si_moves = [(i - 1, j - 1), (i - 1, j + 1), (i + 1, j - 1), (i + 1, j + 1)]
-        for move in si_moves:
+        potential_red_advisor_moves = [(i - 1, j - 1), (i - 1, j + 1), (i + 1, j - 1), (i + 1, j + 1)]
+        for move in potential_red_advisor_moves:
             if move in red_advisor_moves and map[move[0]][move[1]] not in red_pieces:
                 moves.append((move[0], move[1]))
     # Get all possible moves for red elephant
@@ -330,9 +331,9 @@ def possible_moves(piece, i, j, map):
                 if map[i][j + 1] not in black_pieces: moves.append((i, j + 1))
     # Get all moves for black advisor
     if piece in ['black_advisor', 'black_advisor1']:
-        si_moves = [(i - 1, j - 1), (i - 1, j + 1), (i + 1, j - 1), (i + 1, j + 1)]
-        for move in si_moves:
-            if move in black_advisor_mvoes and map[move[0]][move[1]] not in black_pieces:
+        potential_black_advisor_moves = [(i - 1, j - 1), (i - 1, j + 1), (i + 1, j - 1), (i + 1, j + 1)]
+        for move in potential_black_advisor_moves:
+            if move in black_advisor_moves and map[move[0]][move[1]] not in black_pieces:
                 moves.append((move[0], move[1]))
     # Get all moves for black elephant
     if piece in ['black_elephant', 'black_elephant1']:
