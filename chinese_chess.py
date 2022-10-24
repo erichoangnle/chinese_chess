@@ -588,7 +588,9 @@ def checkmate(map, turn):
 def end_game(map, turn):
     """
     Check if there is no move to un-checkmate. In such case, 
-    the game is over and current player is lost.
+    the game is over and current player is lost. Also, if current
+    player is not under checkmate, but there is no legal move left,
+    current player is also lost.
     """
     for piece in player(turn):
         if on_board(piece, map):
