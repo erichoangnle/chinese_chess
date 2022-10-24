@@ -638,12 +638,6 @@ while True:
     # Check if game is over
     if end_game(map, turn):
 
-        # Circle tướng active if under checkmate
-        if checkmate(map, turn):
-            if player(turn) == red_pieces: i, j = get_ij('red_general', map)
-            if player(turn) == black_pieces: i, j = get_ij('black_general', map)
-            screen.blit(active, (board[i][j][0] - 22, board[i][j][1] - 22))
-
         # Reset game if player choose to play again
         if end_game_question(turn, x, y):       
             map = copy.deepcopy(original_map)
@@ -685,6 +679,7 @@ while True:
                 screen.blit(active, (board[i][j][0] - 22, board[i][j][1] - 22))
                 for move in moves:
                     screen.blit(dot, (board[move[0]][move[1]][0] - 2, board[move[0]][move[1]][1] - 2))
+
             # If second click on a move
             elif second_click and move_clicked(moves, x, y):   
                 move = move_clicked(moves, x, y)
@@ -692,6 +687,7 @@ while True:
                 render_game(map)
                 second_click = False
                 turn += 1
+
             else:
                 render_game(map)
                 second_click = False
