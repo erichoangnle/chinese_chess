@@ -162,6 +162,7 @@ def possible_moves(piece, i, j, map):
     not the BOARD list of pixel to display sprites.
     """
     moves = []
+
     # Get all possible moves for red soldier
     if piece in ['red_soldier', 'red_soldier1', 'red_soldier2', 'red_soldier3', 'red_soldier4']:
         if (i - 1) >= 0:
@@ -172,12 +173,14 @@ def possible_moves(piece, i, j, map):
                 if map[i][j - 1] not in red_pieces: moves.append((i, j - 1))
             if (j + 1) <= 8:
                 if map[i][j + 1] not in red_pieces: moves.append((i, j + 1))
+
     # Get all possible moves for red advisor
     if piece in ['red_advisor', 'red_advisor1']:
         potential_red_advisor_moves = [(i - 1, j - 1), (i - 1, j + 1), (i + 1, j - 1), (i + 1, j + 1)]
         for move in potential_red_advisor_moves:
             if move in red_advisor_moves and map[move[0]][move[1]] not in red_pieces:
                 moves.append((move[0], move[1]))
+
     # Get all possible moves for red elephant
     if piece in ['red_elephant', 'red_elephant1']:
         voi_moves = [(i - 2, j - 2), (i - 2, j + 2), (i + 2, j - 2), (i + 2, j + 2)]
@@ -186,6 +189,7 @@ def possible_moves(piece, i, j, map):
             if voi_moves[i] in red_elephant_moves and map[voi_moves[i][0]][voi_moves[i][1]] not in red_pieces:
                 if not map[voi_blocks[i][0]][voi_blocks[i][1]]:
                     moves.append((voi_moves[i][0], voi_moves[i][1]))
+
     # Get all moves for red general
     if piece == 'red_general':
         tuong_moves = [(i + 1, j), (i - 1, j), (i, j + 1), (i, j - 1)]
@@ -201,6 +205,7 @@ def possible_moves(piece, i, j, map):
                     break
                 else: break
             t += 1
+
     # Get all moves for red horse
     if piece in ['red_horse', 'red_horse1']:
         ma_moves = []
@@ -218,9 +223,11 @@ def possible_moves(piece, i, j, map):
             if (i + 1) <= 9: ma_moves.append((i + 1, j - 2))
         for move in ma_moves:
             if not map[move[0]][move[1]] or map[move[0]][move[1]] not in red_pieces:
-                moves.append((move[0], move[1]))           
+                moves.append((move[0], move[1]))
+
     # Get all moves for red chariot
     if piece in ['red_chariot', 'red_chariot1']:
+
         # Down
         t = 1
         while (i + t) <= 9:
@@ -231,6 +238,7 @@ def possible_moves(piece, i, j, map):
                 break
             else: break
             t += 1
+
         # Up
         t = 1
         while (i - t) >= 0:
@@ -241,6 +249,7 @@ def possible_moves(piece, i, j, map):
                 break
             else: break
             t += 1
+
         # Right
         t = 1
         while(j + t) <= 8:
@@ -251,6 +260,7 @@ def possible_moves(piece, i, j, map):
                 break
             else: break
             t += 1
+
         # Left
         t = 1
         while(j - t) >= 0:
@@ -261,8 +271,10 @@ def possible_moves(piece, i, j, map):
                 break
             else: break
             t += 1
+
     # Get all moves for red cannon
     if piece in ['red_cannon', 'red_cannon1']:
+
         # Down
         t = 1
         f = 0
@@ -277,6 +289,7 @@ def possible_moves(piece, i, j, map):
                 else: f += 1
             elif map[i + t][j] in red_pieces: f += 1 
             t += 1
+
         # Up
         t = 1
         f = 0
@@ -291,6 +304,7 @@ def possible_moves(piece, i, j, map):
                 else: f += 1
             elif map[i - t][j] in red_pieces: f += 1 
             t += 1
+
         # Right
         t = 1
         f = 0
@@ -305,6 +319,7 @@ def possible_moves(piece, i, j, map):
                 else: f += 1
             elif map[i][j + t] in red_pieces: f += 1 
             t += 1
+
         # Left
         t = 1
         f = 0
@@ -319,6 +334,7 @@ def possible_moves(piece, i, j, map):
                 else: f += 1
             elif map[i][j - t] in red_pieces: f += 1 
             t += 1
+
     # Get all moves for black soldier
     if piece in ['black_soldier', 'black_soldier1', 'black_soldier2', 'black_soldier3', 'black_soldier4']:
         if (i + 1) <= 9:
@@ -329,12 +345,14 @@ def possible_moves(piece, i, j, map):
                 if map[i][j - 1] not in black_pieces: moves.append((i, j - 1))
             if (j + 1) <= 8:
                 if map[i][j + 1] not in black_pieces: moves.append((i, j + 1))
+
     # Get all moves for black advisor
     if piece in ['black_advisor', 'black_advisor1']:
         potential_black_advisor_moves = [(i - 1, j - 1), (i - 1, j + 1), (i + 1, j - 1), (i + 1, j + 1)]
         for move in potential_black_advisor_moves:
             if move in black_advisor_moves and map[move[0]][move[1]] not in black_pieces:
                 moves.append((move[0], move[1]))
+
     # Get all moves for black elephant
     if piece in ['black_elephant', 'black_elephant1']:
         voi_moves = [(i - 2, j - 2), (i - 2, j + 2), (i + 2, j - 2), (i + 2, j + 2)]
@@ -343,6 +361,7 @@ def possible_moves(piece, i, j, map):
             if voi_moves[i] in black_elephant_moves and map[voi_moves[i][0]][voi_moves[i][1]] not in black_pieces:
                 if not map[voi_blocks[i][0]][voi_blocks[i][1]]:
                     moves.append((voi_moves[i][0], voi_moves[i][1]))
+
     # Get all move for black general
     if piece == 'black_general':
         tuong_moves = [(i + 1, j), (i - 1, j), (i, j + 1), (i, j - 1)]
@@ -358,6 +377,7 @@ def possible_moves(piece, i, j, map):
                     break
                 else: break
             t += 1
+
     # Get all moves for black horse
     if piece in ['black_horse', 'black_horse1']:
         ma_moves = []
@@ -376,8 +396,10 @@ def possible_moves(piece, i, j, map):
         for move in ma_moves:
             if not map[move[0]][move[1]] or map[move[0]][move[1]] in red_pieces:
                 moves.append((move[0], move[1]))
+
     # Get all moves for black chariot
     if piece in ['black_chariot', 'black_chariot1']:
+
         # Down
         t = 1
         while (i + t) <= 9:
@@ -388,6 +410,7 @@ def possible_moves(piece, i, j, map):
                 break
             else: break
             t += 1
+
         # Up
         t = 1
         while (i - t) >= 0:
@@ -398,6 +421,7 @@ def possible_moves(piece, i, j, map):
                 break
             else: break
             t += 1
+
         # Right
         t = 1
         while (j + t) <= 8:
@@ -408,6 +432,7 @@ def possible_moves(piece, i, j, map):
                 break
             else: break
             t += 1
+
         # Left
         t = 1
         while (j - t) >= 0:
@@ -418,8 +443,10 @@ def possible_moves(piece, i, j, map):
                 break
             else: break
             t += 1
+
     # Get all moves for black cannon
     if piece in ['black_cannon', 'black_cannon1']:
+
         # Down
         t = 1
         f = 0
@@ -434,6 +461,7 @@ def possible_moves(piece, i, j, map):
                 else: f += 1
             elif map[i + t][j] in black_pieces: f += 1
             t += 1
+
         # Up
         t = 1
         f = 0
@@ -448,6 +476,7 @@ def possible_moves(piece, i, j, map):
                 else: f += 1
             elif map[i - t][j] in black_pieces: f += 1
             t += 1
+
         # Right
         t = 1
         f = 0
@@ -462,6 +491,7 @@ def possible_moves(piece, i, j, map):
                 else: f += 1
             elif map[i][j + t] in black_pieces: f += 1            
             t += 1
+            
         # Left
         t = 1
         f = 0
