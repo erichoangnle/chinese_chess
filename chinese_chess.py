@@ -1,44 +1,44 @@
-import pygame, sys, copy
+import pygame, sys, copy, pathlib
 
 # Load possible moves pointer
-dot = pygame.image.load("images/move.png")
-active = pygame.image.load("images/active.png")
+dot = pygame.image.load(pathlib.Path.cwd() / "images" / "move.png")
+active = pygame.image.load(pathlib.Path.cwd() / "images" / "active.png")
 
 # Pygame surface object dictionary
 pieces_img = {
-'red_chariot': pygame.image.load("images/red_chariot.png"),
-'red_chariot1': pygame.image.load("images/red_chariot.png"),
-'red_horse': pygame.image.load("images/red_horse.png"),
-'red_horse1': pygame.image.load("images/red_horse.png"),
-'red_elephant': pygame.image.load("images/red_elephant.png"),
-'red_elephant1': pygame.image.load("images/red_elephant.png"),
-'red_advisor': pygame.image.load("images/red_advisor.png"),
-'red_advisor1': pygame.image.load("images/red_advisor.png"),
-'red_cannon': pygame.image.load("images/red_cannon.png"),
-'red_cannon1': pygame.image.load("images/red_cannon.png"),
-'red_general': pygame.image.load("images/red_general.png"),
-'red_soldier': pygame.image.load("images/red_soldier.png"),
-'red_soldier1': pygame.image.load("images/red_soldier.png"),
-'red_soldier2': pygame.image.load("images/red_soldier.png"),
-'red_soldier3': pygame.image.load("images/red_soldier.png"),
-'red_soldier4': pygame.image.load("images/red_soldier.png"),
+'red_chariot': pygame.image.load(pathlib.Path.cwd() / "images" / "red_chariot.png"),
+'red_chariot1': pygame.image.load(pathlib.Path.cwd() / "images" / "red_chariot.png"),
+'red_horse': pygame.image.load(pathlib.Path.cwd() / "images" / "red_horse.png"),
+'red_horse1': pygame.image.load(pathlib.Path.cwd() / "images" / "red_horse.png"),
+'red_elephant': pygame.image.load(pathlib.Path.cwd() / "images" / "red_elephant.png"),
+'red_elephant1': pygame.image.load(pathlib.Path.cwd() / "images" / "red_elephant.png"),
+'red_advisor': pygame.image.load(pathlib.Path.cwd() / "images" / "red_advisor.png"),
+'red_advisor1': pygame.image.load(pathlib.Path.cwd() / "images" / "red_advisor.png"),
+'red_cannon': pygame.image.load(pathlib.Path.cwd() / "images" / "red_cannon.png"),
+'red_cannon1': pygame.image.load(pathlib.Path.cwd() / "images" / "red_cannon.png"),
+'red_general': pygame.image.load(pathlib.Path.cwd() / "images" / "red_general.png"),
+'red_soldier': pygame.image.load(pathlib.Path.cwd() / "images" / "red_soldier.png"),
+'red_soldier1': pygame.image.load(pathlib.Path.cwd() / "images" / "red_soldier.png"),
+'red_soldier2': pygame.image.load(pathlib.Path.cwd() / "images" / "red_soldier.png"),
+'red_soldier3': pygame.image.load(pathlib.Path.cwd() / "images" / "red_soldier.png"),
+'red_soldier4': pygame.image.load(pathlib.Path.cwd() / "images" / "red_soldier.png"),
 
-'black_chariot': pygame.image.load("images/black_chariot.png"),
-'black_chariot1': pygame.image.load("images/black_chariot.png"),
-'black_horse': pygame.image.load("images/black_horse.png"),
-'black_horse1': pygame.image.load("images/black_horse.png"),
-'black_elephant': pygame.image.load("images/black_elephant.png"),
-'black_elephant1': pygame.image.load("images/black_elephant.png"),
-'black_advisor': pygame.image.load("images/black_advisor.png"),
-'black_advisor1': pygame.image.load("images/black_advisor.png"),
-'black_cannon': pygame.image.load("images/black_cannon.png"),
-'black_cannon1': pygame.image.load("images/black_cannon.png"),
-'black_general': pygame.image.load("images/black_general.png"),
-'black_soldier': pygame.image.load("images/black_soldier.png"),
-'black_soldier1': pygame.image.load("images/black_soldier.png"),
-'black_soldier2': pygame.image.load("images/black_soldier.png"),
-'black_soldier3': pygame.image.load("images/black_soldier.png"),
-'black_soldier4': pygame.image.load("images/black_soldier.png")
+'black_chariot': pygame.image.load(pathlib.Path.cwd() / "images" / "black_chariot.png"),
+'black_chariot1': pygame.image.load(pathlib.Path.cwd() / "images" / "black_chariot.png"),
+'black_horse': pygame.image.load(pathlib.Path.cwd() / "images" / "black_horse.png"),
+'black_horse1': pygame.image.load(pathlib.Path.cwd() / "images" / "black_horse.png"),
+'black_elephant': pygame.image.load(pathlib.Path.cwd() / "images" / "black_elephant.png"),
+'black_elephant1': pygame.image.load(pathlib.Path.cwd() / "images" / "black_elephant.png"),
+'black_advisor': pygame.image.load(pathlib.Path.cwd() / "images" / "black_advisor.png"),
+'black_advisor1': pygame.image.load(pathlib.Path.cwd() / "images" / "black_advisor.png"),
+'black_cannon': pygame.image.load(pathlib.Path.cwd() / "images" / "black_cannon.png"),
+'black_cannon1': pygame.image.load(pathlib.Path.cwd() / "images" / "black_cannon.png"),
+'black_general': pygame.image.load(pathlib.Path.cwd() / "images" / "black_general.png"),
+'black_soldier': pygame.image.load(pathlib.Path.cwd() / "images" / "black_soldier.png"),
+'black_soldier1': pygame.image.load(pathlib.Path.cwd() / "images" / "black_soldier.png"),
+'black_soldier2': pygame.image.load(pathlib.Path.cwd() / "images" / "black_soldier.png"),
+'black_soldier3': pygame.image.load(pathlib.Path.cwd() / "images" / "black_soldier.png"),
+'black_soldier4': pygame.image.load(pathlib.Path.cwd() / "images" / "black_soldier.png")
 }
 
 # List of board coordinates
@@ -635,7 +635,7 @@ screen = pygame.display.set_mode(size)
 # Set game window caption
 pygame.display.set_caption("Chinese Chess")
 # Load background image
-bg = pygame.image.load("images/bg.jpg")
+bg = pygame.image.load(pathlib.Path.cwd() / "images" / "bg.jpg")
 # Display game board and pieces
 render_game(map)
 # Check for second click
