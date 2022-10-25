@@ -110,4 +110,4 @@ Email: erichoangnle@gmail.com
 
 Facebook: https://www.facebook.com/eric.le.520900
 
-Project link: https://github.com/erichoangnle/diary.git
+Project link: https://github.com/erichoangnle/chinese_chess.git
