@@ -40,6 +40,12 @@ git clone https://github.com/erichoangnle/chinese_chess.git
 The object of this game is to force capture of the enemy Governor/General (King). This may be by checkmate (he is under attack and has no means of escape) 
 or by stalemate (he is not under immediate threat, but there is no legal, safe move).
 
+### Soldier
+
+![Soldier!](readme_img/soldier.png "Soldier")
+
+The Foot Soldier moves one point forward. After it crosses the river, it may also move to the right and left, but never backward. Unlike the pawn in western chess, this piece captures just as it moves normally (see diagram). It does not promote upon reaching the far end of the board.
+
 ### The General
 
 ![General!](readme_img/general.png "General")
@@ -80,7 +86,7 @@ piece or the edge of the board.
 
 The Cannon/Catapult is a peculiar piece. It moves exactly like the Chariot (or rook) when not capturing. But to capture, it must have a piece, 
 friend or foe, in line to jump over. In this diagram, the Cannon/Catapult can capture the enemy pawn, as shown. It can not, however, move 
-beyond that pawn, or to the unoccupied points A or B.
+beyond that pawn, or to the unoccupied marked by X's.
 
 ## Additional Rules
 
