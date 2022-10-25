@@ -129,7 +129,7 @@ def render_game(map):
     """
     Initialize game window. Fill window with chess board background
     and display all the chess pieces on the board according to
-    current map of the game
+    current map of the game.
     """
     # Choose white canvas
     screen.fill((255, 255, 255))
@@ -146,7 +146,7 @@ def piece_clicked(x, y):
     Listen for event in game window to determine which piece was clicked on.
     Only return the piece's name and its location of clicked piece
     belong to current player. You can't click on your oppenent's pieces.
-    Return a pair of coordinate (i, j) on the map.
+    Return piece's name and a pair of its coordinate (i, j) on the map.
     """
     for i in range(len(map)):
         for j in range(len(map[0])):
@@ -157,8 +157,8 @@ def piece_clicked(x, y):
 def possible_moves(piece, i, j, map):
     """
     Return a list of all possible moves for a piece.
-    list elements are pair of (i, j) corrdinates,
-    Which is the position of a piece on the map,
+    List elements are pair of (i, j) corrdinates,
+    which is the position of a piece on the map,
     not the BOARD list of pixel to display sprites.
     """
     moves = []
@@ -183,17 +183,17 @@ def possible_moves(piece, i, j, map):
 
     # Get all possible moves for red elephant
     if piece in ['red_elephant', 'red_elephant1']:
-        voi_moves = [(i - 2, j - 2), (i - 2, j + 2), (i + 2, j - 2), (i + 2, j + 2)]
-        voi_blocks = [(i - 1, j - 1), (i - 1, j + 1), (i + 1, j - 1), (i + 1, j + 1)]
-        for i in range(len(voi_moves)):
-            if voi_moves[i] in red_elephant_moves and map[voi_moves[i][0]][voi_moves[i][1]] not in red_pieces:
-                if not map[voi_blocks[i][0]][voi_blocks[i][1]]:
-                    moves.append((voi_moves[i][0], voi_moves[i][1]))
+        potential_red_elephant_moves = [(i - 2, j - 2), (i - 2, j + 2), (i + 2, j - 2), (i + 2, j + 2)]
+        red_elephant_blocks = [(i - 1, j - 1), (i - 1, j + 1), (i + 1, j - 1), (i + 1, j + 1)]
+        for i in range(len(potential_red_elephant_moves)):
+            if potential_red_elephant_moves[i] in red_elephant_moves and map[potential_red_elephant_moves[i][0]][potential_red_elephant_moves[i][1]] not in red_pieces:
+                if not map[red_elephant_blocks[i][0]][red_elephant_blocks[i][1]]:
+                    moves.append((potential_red_elephant_moves[i][0], potential_red_elephant_moves[i][1]))
 
     # Get all moves for red general
     if piece == 'red_general':
-        tuong_moves = [(i + 1, j), (i - 1, j), (i, j + 1), (i, j - 1)]
-        for move in tuong_moves:
+        potential_red_general_moves = [(i + 1, j), (i - 1, j), (i, j + 1), (i, j - 1)]
+        for move in potential_red_general_moves:
             if move in red_general_moves and map[move[0]][move[1]] not in red_pieces:
                 moves.append((move[0], move[1]))
         t = 1
@@ -208,20 +208,20 @@ def possible_moves(piece, i, j, map):
 
     # Get all moves for red horse
     if piece in ['red_horse', 'red_horse1']:
-        ma_moves = []
+        potential_red_horse_moves = []
         if (i - 2) >= 0 and not map[i - 1][j]:
-            if (j - 1) >= 0: ma_moves.append((i - 2, j - 1))
-            if (j + 1) <= 8: ma_moves.append((i - 2, j + 1))
+            if (j - 1) >= 0: potential_red_horse_moves.append((i - 2, j - 1))
+            if (j + 1) <= 8: potential_red_horse_moves.append((i - 2, j + 1))
         if (i + 2) <= 9 and not map[i + 1][j]:
-            if (j - 1) >= 0: ma_moves.append((i + 2, j - 1))
-            if (j + 1) <= 8: ma_moves.append((i + 2, j + 1))
+            if (j - 1) >= 0: potential_red_horse_moves.append((i + 2, j - 1))
+            if (j + 1) <= 8: potential_red_horse_moves.append((i + 2, j + 1))
         if (j + 2) <= 8 and not map[i][j + 1]:
-            if (i - 1) >= 0: ma_moves.append((i - 1, j + 2))
-            if (i + 1) <= 9: ma_moves.append((i + 1, j + 2))
+            if (i - 1) >= 0: potential_red_horse_moves.append((i - 1, j + 2))
+            if (i + 1) <= 9: potential_red_horse_moves.append((i + 1, j + 2))
         if (j - 2) >= 0 and not map[i][j - 1]:
-            if (i - 1) >= 0: ma_moves.append((i - 1, j - 2))
-            if (i + 1) <= 9: ma_moves.append((i + 1, j - 2))
-        for move in ma_moves:
+            if (i - 1) >= 0: potential_red_horse_moves.append((i - 1, j - 2))
+            if (i + 1) <= 9: potential_red_horse_moves.append((i + 1, j - 2))
+        for move in potential_red_horse_moves:
             if not map[move[0]][move[1]] or map[move[0]][move[1]] not in red_pieces:
                 moves.append((move[0], move[1]))
 
@@ -355,17 +355,17 @@ def possible_moves(piece, i, j, map):
 
     # Get all moves for black elephant
     if piece in ['black_elephant', 'black_elephant1']:
-        voi_moves = [(i - 2, j - 2), (i - 2, j + 2), (i + 2, j - 2), (i + 2, j + 2)]
-        voi_blocks = [(i - 1, j - 1), (i - 1, j + 1), (i + 1, j - 1), (i + 1, j + 1)]
-        for i in range(len(voi_moves)):
-            if voi_moves[i] in black_elephant_moves and map[voi_moves[i][0]][voi_moves[i][1]] not in black_pieces:
-                if not map[voi_blocks[i][0]][voi_blocks[i][1]]:
-                    moves.append((voi_moves[i][0], voi_moves[i][1]))
+        potential_red_elephant_moves = [(i - 2, j - 2), (i - 2, j + 2), (i + 2, j - 2), (i + 2, j + 2)]
+        red_elephant_blocks = [(i - 1, j - 1), (i - 1, j + 1), (i + 1, j - 1), (i + 1, j + 1)]
+        for i in range(len(potential_red_elephant_moves)):
+            if potential_red_elephant_moves[i] in black_elephant_moves and map[potential_red_elephant_moves[i][0]][potential_red_elephant_moves[i][1]] not in black_pieces:
+                if not map[red_elephant_blocks[i][0]][red_elephant_blocks[i][1]]:
+                    moves.append((potential_red_elephant_moves[i][0], potential_red_elephant_moves[i][1]))
 
     # Get all move for black general
     if piece == 'black_general':
-        tuong_moves = [(i + 1, j), (i - 1, j), (i, j + 1), (i, j - 1)]
-        for move in tuong_moves:
+        potential_black_general_moves = [(i + 1, j), (i - 1, j), (i, j + 1), (i, j - 1)]
+        for move in potential_black_general_moves:
             if move in black_general_moves and map[move[0]][move[1]] not in black_pieces: 
                 moves.append((move[0], move[1]))
         t = 1
@@ -380,20 +380,20 @@ def possible_moves(piece, i, j, map):
 
     # Get all moves for black horse
     if piece in ['black_horse', 'black_horse1']:
-        ma_moves = []
+        potential_black_horse_moves = []
         if (i - 2) >= 0 and not map[i - 1][j]:
-            if (j - 1) >= 0: ma_moves.append((i - 2, j - 1))
-            if (j + 1) <= 8: ma_moves.append((i - 2, j + 1))
+            if (j - 1) >= 0: potential_black_horse_moves.append((i - 2, j - 1))
+            if (j + 1) <= 8: potential_black_horse_moves.append((i - 2, j + 1))
         if (i + 2) <= 9 and not map[i + 1][j]:
-            if (j - 1) >= 0: ma_moves.append((i + 2, j - 1))
-            if (j + 1) <= 8: ma_moves.append((i + 2, j + 1))
+            if (j - 1) >= 0: potential_black_horse_moves.append((i + 2, j - 1))
+            if (j + 1) <= 8: potential_black_horse_moves.append((i + 2, j + 1))
         if (j + 2) <= 8 and not map[i][j + 1]:
-            if (i - 1) >= 0: ma_moves.append((i - 1, j + 2))
-            if (i + 1) <= 9: ma_moves.append((i + 1, j + 2))
+            if (i - 1) >= 0: potential_black_horse_moves.append((i - 1, j + 2))
+            if (i + 1) <= 9: potential_black_horse_moves.append((i + 1, j + 2))
         if (j - 2) >= 0 and not map[i][j - 1]:
-            if (i - 1) >= 0: ma_moves.append((i - 1, j - 2))
-            if (i + 1) <= 9: ma_moves.append((i + 1, j - 2))
-        for move in ma_moves:
+            if (i - 1) >= 0: potential_black_horse_moves.append((i - 1, j - 2))
+            if (i + 1) <= 9: potential_black_horse_moves.append((i + 1, j - 2))
+        for move in potential_black_horse_moves:
             if not map[move[0]][move[1]] or map[move[0]][move[1]] in red_pieces:
                 moves.append((move[0], move[1]))
 
@@ -526,7 +526,7 @@ def check_future_checkmate(piece, moves, turn, map):
 
 def move_clicked(moves, x, y):
     """
-    Determine which move was clicked
+    Determine which move was clicked on.
     """
     for move in moves:
         if dot.get_rect(topleft = (board[move[0]][move[1]][0], board[move[0]][move[1]][1])).collidepoint(x, y):
@@ -547,7 +547,7 @@ def make_move(piece, move, map):
 
 def get_ij(piece, map):
     """
-    Get the (i, j) index of a chess piece on map
+    Get the (i, j) index of a chess piece on map.
     """
     for i in range(10):
         for j in range(9):
@@ -565,7 +565,7 @@ def on_board(piece, map):
 
 def checkmate(map, turn):
     """
-    Check if you are being checkmated.
+    Check if current player is being checkmated.
     """
     # Get the position of the general
     if player(turn) == red_pieces: i, j = get_ij('red_general', map)
